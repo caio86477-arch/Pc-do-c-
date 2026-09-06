@@ -22,11 +22,8 @@ jobs:
           net user Skyro Senha123! /add /active:yes
           net localgroup administrators Skyro /add
           net accounts /maxpwage:UNLIMITED
-          Start-Sleep -Seconds 3
           $Password = ConvertTo-SecureString "Senha123!" -AsPlainText -Force
           Set-LocalUser -Name "Skyro" -Password $Password
-          Set-LocalUser -Name "Skyro" -PasswordNeverExpires $true
-          Set-LocalUser -Name "Skyro" -AccountNeverExpires $true
 
       - name: Install Tailscale
         shell: powershell
