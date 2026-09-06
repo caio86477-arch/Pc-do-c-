@@ -19,9 +19,9 @@ jobs:
       - name: Create RDP User
         shell: powershell
         run: |
-          net user Skyro /add
+          net user Skyro Senha123! /add
           net localgroup administrators Skyro /add
-          net user Skyro Senha123!
+          net accounts /maxpwage:UNLIMITED
 
       - name: Install Tailscale
         shell: powershell
