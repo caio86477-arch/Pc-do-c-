@@ -20,4 +20,7 @@ jobs:
         run: |
           Invoke-WebRequest -Uri "https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-windows-amd64.exe" -OutFile "cloudflared.exe"
 
+      - name: Iniciar Conexao
+        run: .\cloudflared.exe tunnel --url rdp://localhost:3389
+
           
