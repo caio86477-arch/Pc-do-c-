@@ -16,6 +16,8 @@ jobs:
           Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -Name "UserAuthentication" -Value 0
           net user RunnerAdmin SenhaForte123!
 
-      - name: Iniciar Conexao
-        run: ssh -R 0:localhost:3389 serveo.net
+      - name: Baixar Cloudflare Tunnel
+        run: |
+          Invoke-WebRequest -Uri "https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-windows-amd64.exe" -OutFile "cloudflared.exe"
+
           
