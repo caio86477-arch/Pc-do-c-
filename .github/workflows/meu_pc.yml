@@ -146,5 +146,6 @@ jobs:
           while ($true) {
               Write-Host "[$(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')] RDP Active"
               Start-Sleep -Seconds 300
+          }
 
           
