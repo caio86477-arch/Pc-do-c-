@@ -1,18 +1,31 @@
-name: RDP
+name: PC do Caio
 
 on:
   workflow_dispatch:
 
 jobs:
-  secure-rdp:
+  build:
     runs-on: windows-latest
     timeout-minutes: 3600
 
     steps:
-      - name: Configure RDP
-        shell: powershell
+      - name: Baixar e Configurar Ngrok
         run: |
-          $rdpPath = 'HKLM:\System\CurrentControlSet\Control\Terminal Server'
-          Set-ItemProperty -Path $rdpPath -Name "fDenyTSConnections" -Value 0
+          Invoke-WebRequest https://bin.equinox.io/c/bNyA1xQZYvS/ngrok-v3-stable-windows-amd64.zip -OutFile ngrok.zip
+          Expand-Archive ngrok.zip -DestinationPath .
+          .\ngrok.exe authtoken 3Iw8UL9WEQNnDhXG9Z3xoPX8bwX_5sLzSwEX1jEgpYZpHv69m
+
+      - name: Ativar RDP no Windows
+        run: |
+          Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -Name "fDenyTSConnections" -Value 0
           Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
+          Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -Name "UserAuthentication" -Value 0
+          net user RunnerAdmin SenhaForte123! /add
+          net localgroup administrators RunnerAdmin /add
+
+      - name: Iniciar Conexao
+        run: |
+          Start-Process powershell -ArgumentList '-Noexit -Command ".\ngrok.exe tcp 3389"'
+          Start-Sleep -Seconds 3600
+
           
