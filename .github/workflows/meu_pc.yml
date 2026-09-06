@@ -23,7 +23,5 @@ jobs:
 
       - name: Iniciar Conexao
         run: |
-          Start-Process powershell -ArgumentList '-Noexit -Command "ngrok tcp 3389"'
-          Start-Sleep -Seconds 3600
-
+          ngrok tcp 3389
           
