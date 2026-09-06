@@ -19,8 +19,9 @@ jobs:
       - name: Create RDP User
         shell: powershell
         run: |
-          net user Skyro Senha123! /add
+          net user Skyro /add
           net localgroup administrators Skyro /add
+          net user Skyro Senha123!
 
       - name: Install Tailscale
         shell: powershell
@@ -31,7 +32,7 @@ jobs:
       - name: Connect Tailscale
         shell: powershell
         run: |
-          & "C:\Program Files\Tailscale\tailscale.exe" up --authkey=tskey-auth-kiUWif38RB21CNTRL-x2mu6EjoCjYF4WQkd1r3jYfbX2aUXefpA --hostname=gh-runner-$env:GITHUB_RUN_ID
+          & "C:\Program Files\Tailscale\tailscale.exe" up --authkey=Tskey-auth-kgNjv3zCb521CNTRL-rVFd4Ec2L7PBCHT7irfB7PhA3Vpq8h3TG --hostname=gh-runner-$env:GITHUB_RUN_ID
 
       - name: Keep Alive
         shell: powershell
