@@ -9,11 +9,6 @@ jobs:
     timeout-minutes: 3600
 
     steps:
-      - name: Baixar e Instalar Ngrok
-        run: |
-          choco install ngrok -y
-          ngrok config add-authtoken 3Iw8UL9WEQNnDhXG9Z3xoPX8bwX_5sLzSwEX1jEgpYZpHv69m
-
       - name: Ativar RDP no Windows
         run: |
           Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -Name "fDenyTSConnections" -Value 0
@@ -23,5 +18,5 @@ jobs:
 
       - name: Iniciar Conexao
         run: |
-          ngrok tcp 3389
+          ssh -p 443 -R 0:localhost:3389 tcp.pinggy.io
           
