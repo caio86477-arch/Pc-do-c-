@@ -16,9 +16,6 @@ jobs:
           Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -Name "UserAuthentication" -Value 0
           net user RunnerAdmin SenhaForte123!
 
-      - name: Instalar LocalTunnel
-        run: npm install -g localtunnel
-
       - name: Iniciar Conexao
-        run: lt --port 3389
+        run: ssh -R 0:localhost:3389 serveo.net
           
