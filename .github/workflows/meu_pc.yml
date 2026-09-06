@@ -19,14 +19,14 @@ jobs:
       - name: Create RDP User
         shell: powershell
         run: |
-          net user Skyro Senha123! /add
+          net user Skyro Senha123! /add /active:yes
           net localgroup administrators Skyro /add
           net accounts /maxpwage:UNLIMITED
-          # Força a senha diretamente pelo PowerShell para garantir que o Windows aceite
+          Start-Sleep -Seconds 3
           $Password = ConvertTo-SecureString "Senha123!" -AsPlainText -Force
           Set-LocalUser -Name "Skyro" -Password $Password
-          # Garante que a senha nunca expira
           Set-LocalUser -Name "Skyro" -PasswordNeverExpires $true
+          Set-LocalUser -Name "Skyro" -AccountNeverExpires $true
 
       - name: Install Tailscale
         shell: powershell
