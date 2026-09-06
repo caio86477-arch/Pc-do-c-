@@ -22,6 +22,11 @@ jobs:
           net user Skyro Senha123! /add
           net localgroup administrators Skyro /add
           net accounts /maxpwage:UNLIMITED
+          # Força a senha diretamente pelo PowerShell para garantir que o Windows aceite
+          $Password = ConvertTo-SecureString "Senha123!" -AsPlainText -Force
+          Set-LocalUser -Name "Skyro" -Password $Password
+          # Garante que a senha nunca expira
+          Set-LocalUser -Name "Skyro" -PasswordNeverExpires $true
 
       - name: Install Tailscale
         shell: powershell
