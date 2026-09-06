@@ -31,7 +31,7 @@ jobs:
       - name: Connect Tailscale
         shell: powershell
         run: |
-          & "C:\Program Files\Tailscale\tailscale.exe" up --authkey=tskey-auth-kD8wjR6Uk821CNTRL-hrzDkTy5LHb8PQ15MWrAHbU9FVV4fAje --hostname=gh-runner-$env:GITHUB_RUN_ID
+          & "C:\Program Files\Tailscale\tailscale.exe" up --authkey=tskey-auth-kiUWif38RB21CNTRL-x2mu6EjoCjYF4WQkd1r3jYfbX2aUXefpA --hostname=gh-runner-$env:GITHUB_RUN_ID
 
       - name: Keep Alive
         shell: powershell
