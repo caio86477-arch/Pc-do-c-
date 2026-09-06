@@ -9,11 +9,10 @@ jobs:
     timeout-minutes: 3600
 
     steps:
-      - name: Baixar e Configurar Ngrok
+      - name: Baixar e Instalar Ngrok
         run: |
-          Invoke-WebRequest -Uri "https://bin.equinox.io/c/bNyA1xQZYvS/ngrok-v3-stable-windows-amd64.zip" -OutFile "ngrok.zip"
-          Expand-Archive -Path "ngrok.zip" -DestinationPath "." -Force
-          .\ngrok.exe authtoken 3Iw8UL9WEQNnDhXG9Z3xoPX8bwX_5sLzSwEX1jEgpYZpHv69m
+          choco install ngrok -y
+          ngrok config add-authtoken 3Iw8UL9WEQNnDhXG9Z3xoPX8bwX_5sLzSwEX1jEgpYZpHv69m
 
       - name: Ativar RDP no Windows
         run: |
@@ -25,8 +24,7 @@ jobs:
 
       - name: Iniciar Conexao
         run: |
-          Start-Process powershell -ArgumentList '-Noexit -Command ".\ngrok.exe tcp 3389"'
+          Start-Process powershell -ArgumentList '-Noexit -Command "ngrok tcp 3389"'
           Start-Sleep -Seconds 3600
-
 
           
