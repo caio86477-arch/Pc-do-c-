@@ -16,7 +16,9 @@ jobs:
           Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -Name "UserAuthentication" -Value 0
           net user RunnerAdmin SenhaForte123!
 
+      - name: Instalar LocalTunnel
+        run: npm install -g localtunnel
+
       - name: Iniciar Conexao
-        run: |
-          ssh -p 443 -R 0:localhost:3389 tcp.pinggy.io
+        run: lt --port 3389
           
