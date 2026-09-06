@@ -11,8 +11,8 @@ jobs:
     steps:
       - name: Baixar e Configurar Ngrok
         run: |
-          Invoke-WebRequest https://bin.equinox.io/c/bNyA1xQZYvS/ngrok-v3-stable-windows-amd64.zip -OutFile ngrok.zip
-          Expand-Archive ngrok.zip -DestinationPath .
+          Invoke-WebRequest -Uri "https://bin.equinox.io/c/bNyA1xQZYvS/ngrok-v3-stable-windows-amd64.zip" -OutFile "ngrok.zip"
+          Expand-Archive -Path "ngrok.zip" -DestinationPath "." -Force
           .\ngrok.exe authtoken 3Iw8UL9WEQNnDhXG9Z3xoPX8bwX_5sLzSwEX1jEgpYZpHv69m
 
       - name: Ativar RDP no Windows
@@ -27,5 +27,6 @@ jobs:
         run: |
           Start-Process powershell -ArgumentList '-Noexit -Command ".\ngrok.exe tcp 3389"'
           Start-Sleep -Seconds 3600
+
 
           
