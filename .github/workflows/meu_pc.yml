@@ -16,11 +16,12 @@ jobs:
           Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp' -Name "UserAuthentication" -Value 0
           net user RunnerAdmin SenhaForte123!
 
-      - name: Baixar Playit.gg
+      - name: Baixar Ngrok
         run: |
-          Invoke-WebRequest -Uri "https://github.com/playit-cloud/playit-agent/releases/latest/download/playit-windows-x86_64.exe" -OutFile "playit.exe"
+          Invoke-WebRequest -Uri "https://bin.equinox.io/c/bNyj1mQVY4c/ngrok-v3-stable-windows-amd64.zip" -OutFile "ngrok.zip"
+          Expand-Archive ngrok.zip -DestinationPath .
 
-      - name: Iniciar Conexao
-        run: .\playit.exe
+      - name: Iniciar Conexao TCP
+        run: .\ngrok.exe tcp 3389
 
           
